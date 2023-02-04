@@ -20,14 +20,17 @@ window.onload = function () {
   snakeHead.style.height = `${blockSize}px`;
   snakeHead.style.width = `${blockSize}px`;
   snakeHead.style.backgroundColor = "green";
-  // snakeHead.style.backgroundImage = "url('assets/snakesface.jpg')";
+  //
 
   snakeHead.style.position = "absolute";
   snakeHead.style.left = `${snakeHor}px`;
   snakeHead.style.bottom = `${snakeVert}px`;
   snakeHead.style.borderRadius = "5px";
-
-  update();
+  const smileContain = document.createElement("img");
+  smileContain.style.width = `${blockSize}px`;
+  smileContain.style.height = `${blockSize}px`;
+  smileContain.src = "assets/snakeface.png";
+  snakeHead.appendChild(smileContain);
 };
 
 function move() {
