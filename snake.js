@@ -2,16 +2,36 @@
 const columns = 15;
 const rows = 15;
 const blockSize = 20;
+const updateInterval = 500;
+
+let snakeVert = blockSize * 3;
+let snakeHor = blockSize * 5;
 
 const board = document.getElementById("board");
 
-board.setAttribute("width", `${columns * blockSize}px`);
-board.setAttribute("height", `${rows * blockSize}px`);
-board.setAttribute("background-color", "black");
+window.onload = function () {
+  board.setAttribute("width", `${columns * blockSize}px`);
+  board.setAttribute("height", `${rows * blockSize}px`);
+  board.style.backgroundColor = "grey";
+  board.style.margin = "auto";
+  board.style.position = "relative";
+  const snakeHead = document.createElement("div");
+  board.appendChild(snakeHead);
+  snakeHead.style.height = `${blockSize}px`;
+  snakeHead.style.width = `${blockSize}px`;
+  snakeHead.style.backgroundColor = "green";
+  // snakeHead.style.backgroundImage = "url('assets/snakesface.jpg')";
 
-// window.onload = function () {
-//   board.setAttribute("style", `width:${columns * blockSize}`);
-//   board.setAttribute("height", `height:${rows * blockSize}`);
-//   board.setAttribute("style", "background-color: black");
-//   console.log(board.getAttribute("width"));
-// };
+  snakeHead.style.position = "absolute";
+  snakeHead.style.left = `${snakeHor}px`;
+  snakeHead.style.bottom = `${snakeVert}px`;
+  snakeHead.style.borderRadius = "5px";
+
+  update();
+};
+
+function move() {
+  const moveStep = 5;
+}
+
+function update() {}
