@@ -1,3 +1,27 @@
 body {
   text-align: center;
 }
+.board {
+  background-color: grey;
+  margin: auto;
+  position: relative;
+  border: 3px groove black;
+  border-radius: 3px;
+  box-shadow: 0 0 10px 5px darkgray;
+}
+.steering {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 200px;
+  margin: 50px auto 10px auto;
+  height: 100px;
+  flex-wrap: wrap;
+}
+.steering button {
+  width: 50%;
+}
+.steering button:first-of-type,
+.steering button:last-of-type {
+  width: 100%;
+}

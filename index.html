@@ -9,10 +9,18 @@
   </head>
   <body>
     <h1>Good ol' Snake</h1>
-    <div
-      class="board"
-      id="board"
-      style="background-color: black; width: 300px; height: 300px"></div>
+    <div class="board" id="board"></div>
+    <div class="steering" id="steering">
+      <button id="button_1" class="button1" onclick="moveDirection = 1">
+        UP</button
+      ><button id="button_2" class="button2" onclick="moveDirection = 3">
+        LEFT</button
+      ><button id="button_3" class="button3" onclick="moveDirection = 4">
+        RIGHT</button
+      ><button id="button_4" class="button4" onclick="moveDirection = 2">
+        DOWN
+      </button>
+    </div>
   </body>
   <script src="snake.js"></script>
 </html>
