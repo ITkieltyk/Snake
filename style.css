@@ -25,3 +25,7 @@ body {
 .steering button:last-of-type {
   width: 100%;
 }
+.segment {
+  background-color: rgb(31, 179, 31);
+  border-radius: 5px;
+}
