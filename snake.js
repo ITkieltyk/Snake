@@ -184,6 +184,7 @@ function HighScore() {
 
 function highScoreTable() {
   document.getElementById("highscoreTable").style.visibility = "visible";
+  document.getElementById("highscoreTable").style.width = "fit-content";
 
   const listElement = document.createElement("li");
   listElement.innerText = `${highScoreList[highScoreList.length - 1][0]}: ${

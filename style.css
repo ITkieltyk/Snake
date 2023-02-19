@@ -4,6 +4,10 @@ body {
 main {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+}
+.wrapper {
+  width: fit-content;
 }
 .board {
   background-color: grey;
