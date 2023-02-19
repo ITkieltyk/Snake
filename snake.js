@@ -4,12 +4,14 @@ const rows = 15;
 const blockSize = 20;
 const updateInterval = 500;
 const snake = [];
+let score = 0;
 
 let snakeVert = blockSize * 3;
 let snakeHor = blockSize * 5;
 let foodVert = blockSize * 7;
 let foodHor = blockSize * 7;
 let moveDirection = 0;
+const highScoreList = [];
 
 // board setting, snake head  and food placing
 // board
@@ -66,23 +68,14 @@ setTimeout(function () {
 }, 3000);
 
 function update() {
-  // collision check
-  wallsCollision();
-  // Direction change
-  // snake.forEach((snakeSegment, segind) => {
-  //   if (segind !== 0) {
-  //     snakeSegment.style.bottom = snake[segind - 1].style.bottom;
-  //     snakeSegment.style.left = snake[segind - 1].style.left;
-  //   }
-  // });
-
+  //snake segments positiong update
   for (let i = snake.length - 1; i > 0; i--) {
     if (i !== 0) {
       snake[i].style.bottom = snake[i - 1].style.bottom;
       snake[i].style.left = snake[i - 1].style.left;
     }
   }
-
+  // snakeHead new position position
   if (moveDirection === 1) {
     snakeVert = snakeVert + blockSize;
   } else if (moveDirection === 2) {
@@ -95,9 +88,14 @@ function update() {
     snakeVert = snakeVert;
     snakeHor = snakeHor;
   }
+  // walls collision check
   wallsCollision();
+  //snakeHead position update
   snakeHead.style.left = `${snakeHor}px`;
   snakeHead.style.bottom = `${snakeVert}px`;
+  //snake own body colision
+  eatingTail();
+  //snake growing
   eat();
 }
 
@@ -113,16 +111,34 @@ function wallsCollision() {
 }
 
 function eatingTail() {
-  snake.forEach((snakeSegment, segInx) => {});
+  snake.forEach((snakeSegment, segInx) => {
+    if (segInx !== 0) {
+      if (
+        (snakeHead.style.bottom === snakeSegment.style.bottom) &
+        (snakeHead.style.left === snakeSegment.style.left)
+      ) {
+        gameOver();
+      }
+    }
+  });
 }
 
 function gameOver() {
+  score = snake.length - 1;
+
   moveDirection = 0;
   snakeVert = blockSize * 3;
   snakeHor = blockSize * 5;
   foodVert = blockSize * 7;
   foodHor = blockSize * 7;
+  food.style.left = `${foodHor}px`;
+  food.style.bottom = `${foodVert}px`;
+  for (let i = snake.length - 1; i > 0; i--) {
+    board.lastChild.remove();
+  }
+  snake.length = 1;
   alert("Game over!");
+  HighScore();
 }
 function eat() {
   if ((snakeHor === foodHor) & (snakeVert === foodVert)) {
@@ -140,7 +156,38 @@ function eat() {
     foodVert = Math.floor(Math.random() * rows) * blockSize;
     food.style.left = `${foodHor}px`;
     food.style.bottom = `${foodVert}px`;
-    document.getElementById("segmentCounter").innerHTML = snake.length;
-    console.log(snake[snake.length - 1]);
+    //eaten food counter
+    document.getElementById("segmentCounter").innerHTML = `Score: ${
+      snake.length - 1
+    }`;
   }
+}
+function HighScore() {
+  if (highScoreList.length !== 0) {
+    if (score > highScoreList[highScoreList.length]) {
+      let highScorer = prompt(
+        "Congratulations! New High Score! Enter Your name:",
+        ""
+      );
+      highScoreList.push([highScorer, score]);
+      highScoreTable();
+    }
+  } else {
+    let highScorer = prompt(
+      "Congratulations! New High Score! Enter Your name:",
+      ""
+    );
+    highScoreList.push([highScorer, score]);
+    highScoreTable();
+  }
+}
+
+function highScoreTable() {
+  document.getElementById("highscoreTable").style.visibility = "visible";
+
+  const listElement = document.createElement("li");
+  listElement.innerText = `${highScoreList[highScoreList.length - 1][0]}: ${
+    highScoreList[highScoreList.length - 1][1]
+  }`;
+  document.getElementById("highscoreTable").appendChild(listElement);
 }

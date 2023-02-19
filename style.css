@@ -1,6 +1,10 @@
 body {
   text-align: center;
 }
+main {
+  display: flex;
+  justify-content: center;
+}
 .board {
   background-color: grey;
   margin: auto;
@@ -28,4 +32,7 @@ body {
 .segment {
   background-color: rgb(31, 179, 31);
   border-radius: 5px;
+}
+#highscoreTable {
+  visibility: hidden;
 }
