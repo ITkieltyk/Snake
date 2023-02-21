@@ -177,7 +177,7 @@ function highScoreTable() {
   const highScoretable = document.getElementById("highscoreTable");
   highScoretable.style.visibility = "visible";
   highScoretable.style.width = "fit-content";
-  highScoretable.innerHTML = "";
+  highScoretable.innerHTML = "<h4>Hall of Fame</h4>";
   highScoreList.forEach((el) => {
     const listElement = document.createElement("li");
     listElement.innerText = `${el[0]}: ${el[1]}`;
