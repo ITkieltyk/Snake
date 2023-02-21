@@ -21,13 +21,14 @@ main {
   display: flex;
   border-radius: 5px;
   border: 1px solid black;
-  width: 200px;
+  width: 300px;
   margin: 50px auto 10px auto;
-  height: 100px;
+  height: 150px;
   flex-wrap: wrap;
 }
 .steering button {
   width: 50%;
+  font-size: 2rem;
 }
 .steering button:first-of-type,
 .steering button:last-of-type {
@@ -39,4 +40,55 @@ main {
 }
 #highscoreTable {
   visibility: hidden;
+  margin: auto;
+  width: 90%;
+  border: 1px solid black;
+  margin-top: 5px;
+}
+.popupWrapper {
+  position: relative;
+  width: 250px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: darkgrey;
+}
+.popupWrapper form {
+  padding: 0;
+  margin: 0;
+  height: 120px;
+}
+.popupWrapper h3,
+.popupWrapper h4 {
+  margin: 3px auto;
+}
+.popupWrapper form input[type="text"] {
+  width: 90%;
+  margin: 5px auto;
+  display: block;
+  border: 1px solid black;
+}
+
+.popupWrapper button {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+#highScoreSave {
+  position: static;
+  border-radius: 10px;
+  border: 1px solid black;
+  float: right;
+  margin-right: 10px;
+}
+#popupForHighscore {
+  position: absolute;
+  left: 10%;
+  top: 10%;
+  opacity: 80%;
+}
+.score {
+  font-size: 1.5rem;
 }

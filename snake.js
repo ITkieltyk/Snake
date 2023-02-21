@@ -5,6 +5,7 @@ const blockSize = 20;
 const updateInterval = 500;
 const snake = [];
 let score = 0;
+let intervalCount = 0;
 
 let snakeVert = blockSize * 3;
 let snakeHor = blockSize * 5;
@@ -63,9 +64,9 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
-setTimeout(function () {
-  setInterval(update, updateInterval);
-}, 3000);
+const gameInterval = setInterval(update, updateInterval);
+console.log(gameInterval);
+intervalCount++;
 
 function update() {
   //snake segments positiong update
@@ -125,7 +126,7 @@ function eatingTail() {
 
 function gameOver() {
   score = snake.length - 1;
-
+  clearInterval(intervalCount);
   moveDirection = 0;
   snakeVert = blockSize * 3;
   snakeHor = blockSize * 5;
@@ -163,32 +164,54 @@ function eat() {
   }
 }
 function HighScore() {
-  if (highScoreList.length !== 0) {
-    if (score > highScoreList[highScoreList.length]) {
-      let highScorer = prompt(
-        "Congratulations! New High Score! Enter Your name:",
-        ""
-      );
-      highScoreList.push([highScorer, score]);
-      highScoreTable();
+  if (highScoreList.length > 4) {
+    if (score > highScoreList[highScoreList.length - 1][1]) {
+      PopupInput();
     }
   } else {
-    let highScorer = prompt(
-      "Congratulations! New High Score! Enter Your name:",
-      ""
-    );
-    highScoreList.push([highScorer, score]);
-    highScoreTable();
+    PopupInput();
   }
 }
 
 function highScoreTable() {
-  document.getElementById("highscoreTable").style.visibility = "visible";
-  document.getElementById("highscoreTable").style.width = "fit-content";
+  const highScoretable = document.getElementById("highscoreTable");
+  highScoretable.style.visibility = "visible";
+  highScoretable.style.width = "fit-content";
+  highScoretable.innerHTML = "";
+  highScoreList.forEach((el) => {
+    const listElement = document.createElement("li");
+    listElement.innerText = `${el[0]}: ${el[1]}`;
+    highScoretable.appendChild(listElement);
+  });
+}
 
-  const listElement = document.createElement("li");
-  listElement.innerText = `${highScoreList[highScoreList.length - 1][0]}: ${
-    highScoreList[highScoreList.length - 1][1]
-  }`;
-  document.getElementById("highscoreTable").appendChild(listElement);
+function PopupInput() {
+  const popupForHighscore = document.createElement("div");
+  popupForHighscore.id = "popupForHighscore";
+  popupForHighscore.innerHTML = `<div class="popupWrapper">
+      <h3>Congratulations!</h3>
+      <h4>You have achieved highscore!</h4>
+      <label for="highscorerName">Please write your name:</label>
+      <input type="text" name="highscorerName" id="highscorerName" autofocus />
+      <button onclick="highScoreSave()" id="highScoreSave">Save</button>
+    <button id="highscorePopupClose" onclick = "event.target.parentElement.remove(); setInterval(update, updateInterval);
+  intervalCount++;
+  moveDirection = 0; ">X</button>
+  </div>`;
+
+  board.appendChild(popupForHighscore);
+}
+function highScoreSave() {
+  //push data to table
+  highScoreList.push([document.getElementById("highscorerName").value, score]);
+  highScoreList.sort((a, b) => b[1] - a[1]);
+  if (highScoreList.length === 6) {
+    highScoreList.length = 5;
+  }
+  highScoreTable();
+  console.log(highScoreList);
+  setInterval(update, updateInterval);
+  intervalCount++;
+  moveDirection = 0;
+  document.getElementById("popupForHighscore").remove();
 }

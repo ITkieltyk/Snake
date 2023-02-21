@@ -14,21 +14,24 @@
         <div class="board" id="board"></div>
         <div class="steering" id="steering">
           <button id="button_1" class="button1" onclick="moveDirection = 1">
-            UP</button
+            &uArr;</button
           ><button id="button_2" class="button2" onclick="moveDirection = 3">
-            LEFT</button
+            &lArr;</button
           ><button id="button_3" class="button3" onclick="moveDirection = 4">
-            RIGHT</button
+            &rArr;</button
           ><button id="button_4" class="button4" onclick="moveDirection = 2">
-            DOWN
+            &dArr;
           </button>
         </div>
-        <div id="segmentCounter">Score: 0</div>
+        <div id="segmentCounter" class="score">Score: 0</div>
+        <ol id="highscoreTable" class="table">
+          Hall of Fame
+        </ol>
       </div>
-      <ol id="highscoreTable" class="table">
-        Hall of Fame
-      </ol>
     </main>
   </body>
   <script src="snake.js"></script>
 </html>
+<!-- <div id="popUpHighscore">
+  
+</div> -->
