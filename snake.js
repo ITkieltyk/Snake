@@ -2,7 +2,7 @@
 const columns = 15;
 const rows = 15;
 const blockSize = 20;
-const updateInterval = 500;
+const updateInterval = 200;
 const snake = [];
 let score = 0;
 let intervalCount = 0;
@@ -138,7 +138,7 @@ function gameOver() {
     board.lastChild.remove();
   }
   snake.length = 1;
-  alert("Game over!");
+
   HighScore();
 }
 function eat() {
@@ -167,6 +167,8 @@ function HighScore() {
   if (highScoreList.length > 4) {
     if (score > highScoreList[highScoreList.length - 1][1]) {
       PopupInput();
+    } else {
+      PopupGameover();
     }
   } else {
     PopupInput();
@@ -177,10 +179,10 @@ function highScoreTable() {
   const highScoretable = document.getElementById("highscoreTable");
   highScoretable.style.visibility = "visible";
   highScoretable.style.width = "fit-content";
-  highScoretable.innerHTML = "<h4>Hall of Fame</h4>";
+  highScoretable.innerHTML = "<h3>Hall of Fame</h3>";
   highScoreList.forEach((el) => {
     const listElement = document.createElement("li");
-    listElement.innerText = `${el[0]}: ${el[1]}`;
+    listElement.innerHTML = `${el[0]}: <span style='float: right'>${el[1]}</span>`;
     highScoretable.appendChild(listElement);
   });
 }
@@ -194,7 +196,7 @@ function PopupInput() {
       <label for="highscorerName">Please write your name:</label>
       <input type="text" name="highscorerName" id="highscorerName" autofocus />
       <button onclick="highScoreSave()" id="highScoreSave">Save</button>
-    <button id="highscorePopupClose" onclick = "event.target.parentElement.remove(); setInterval(update, updateInterval);
+    <button id="popupClose" onclick = "event.target.parentElement.remove(); setInterval(update, updateInterval);
   intervalCount++;
   moveDirection = 0; ">X</button>
   </div>`;
@@ -214,4 +216,20 @@ function highScoreSave() {
   intervalCount++;
   moveDirection = 0;
   document.getElementById("popupForHighscore").remove();
+}
+function PopupGameover() {
+  const popupGameOver = document.createElement("div");
+  popupGameOver.id = "popupGameOver";
+  popupGameOver.innerHTML = `<div class="gameOverWrapper">
+      <h2>Game Over!</h2>
+      
+      <button onclick="event.target.parentElement.remove(); setInterval(update, updateInterval);
+  intervalCount++;
+  moveDirection = 0" autofocus>OK</button>
+    <button id="popupClose" onclick = "event.target.parentElement.remove(); setInterval(update, updateInterval);
+  intervalCount++;
+  moveDirection = 0; ">X</button>
+  </div>`;
+
+  board.appendChild(popupGameOver);
 }
