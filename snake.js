@@ -6,6 +6,15 @@ const updateInterval = 200;
 const snake = [];
 let score = 0;
 let intervalCount = 0;
+foodTypes = [
+  "cruelty_free",
+  "bug_report",
+  "fertile",
+  "savings",
+  "smart_toy",
+  "cookie",
+  " sound_detection_dog_barking",
+];
 
 let snakeVert = blockSize * 3;
 let snakeHor = blockSize * 5;
@@ -46,6 +55,10 @@ food.style.borderRadius = "5px";
 food.style.left = `${foodHor}px`;
 food.style.bottom = `${foodVert}px`;
 food.style.backgroundColor = "red";
+food.style.fontSize = "1.3rem";
+food.style.textAlign = "center";
+food.classList.add("material-symbols-outlined");
+food.innerText = `${foodTypes[snake.length % foodTypes.length]}`;
 board.appendChild(food);
 
 //keyboard eventlisteners
@@ -157,6 +170,7 @@ function eat() {
     foodVert = Math.floor(Math.random() * rows) * blockSize;
     food.style.left = `${foodHor}px`;
     food.style.bottom = `${foodVert}px`;
+    food.innerText = `${foodTypes[snake.length % foodTypes.length]}`;
     //eaten food counter
     document.getElementById("segmentCounter").innerHTML = `Score: ${
       snake.length - 1
@@ -174,7 +188,7 @@ function HighScore() {
     PopupInput();
   }
 }
-
+// Creation of highscore table, every game new, sorted table
 function highScoreTable() {
   const highScoretable = document.getElementById("highscoreTable");
   highScoretable.style.visibility = "visible";
@@ -186,7 +200,7 @@ function highScoreTable() {
     highScoretable.appendChild(listElement);
   });
 }
-
+// Function for player name input for highscore table
 function PopupInput() {
   const popupForHighscore = document.createElement("div");
   popupForHighscore.id = "popupForHighscore";
@@ -203,6 +217,7 @@ function PopupInput() {
 
   board.appendChild(popupForHighscore);
 }
+
 function highScoreSave() {
   //push data to table
   highScoreList.push([document.getElementById("highscorerName").value, score]);

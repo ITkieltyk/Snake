@@ -1,10 +1,18 @@
 body {
   text-align: center;
+  font-family: "Monoton", cursive;
+  font-size: 12px;
 }
+.heading {
+  font-size: 1rem;
+  word-wrap: break-word;
+}
+
 main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  font-family: "Press Start 2P", cursive;
 }
 .wrapper {
   width: fit-content;
@@ -51,26 +59,30 @@ main {
 .popupWrapper,
 .gameOverWrapper {
   position: relative;
-  width: 250px;
+  width: 270px;
   padding: 5px;
   border: 1px solid grey;
   border-radius: 10px;
   background-color: darkgrey;
+  font-size: 0.6rem;
+  line-height: 0.7rem;
 }
-.popupWrapper form {
-  padding: 0;
-  margin: 0;
-  height: 120px;
-}
+
 .popupWrapper h3,
 .popupWrapper h4 {
   margin: 3px auto;
+  font-size: 0.8rem;
+  line-height: 0.7rem;
 }
-.popupWrapper form input[type="text"] {
+.popupWrapper h3 {
+  font-size: 0.9rem;
+}
+.popupWrapper input[type="text"] {
   width: 90%;
   margin: 5px auto;
-  display: block;
+  display: inline-block;
   border: 1px solid black;
+  width: 70%;
 }
 
 #popupClose {
@@ -86,14 +98,19 @@ main {
   border: 1px solid black;
   float: right;
   margin-right: 10px;
+  margin-top: 5px;
 }
 #popupForHighscore,
 #popupGameOver {
   position: absolute;
-  left: 10%;
+  left: 3%;
   top: 10%;
   opacity: 80%;
 }
 .score {
-  font-size: 1.5rem;
+  font-size: 1rem;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 40;
 }
