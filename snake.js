@@ -2,11 +2,11 @@
 const columns = 15;
 const rows = 15;
 const blockSize = 20;
-const updateInterval = 200;
+let updateInterval = 500;
 const snake = [];
 let score = 0;
 let intervalCount = 0;
-foodTypes = [
+const foodTypes = [
   "cruelty_free",
   "bug_report",
   "fertile",
@@ -15,6 +15,8 @@ foodTypes = [
   "cookie",
   " sound_detection_dog_barking",
 ];
+// Preparation for new option
+// const segmentText = prompt("Snake message? If not leave empty").split("");
 
 let snakeVert = blockSize * 3;
 let snakeHor = blockSize * 5;
@@ -140,6 +142,7 @@ function eatingTail() {
 function gameOver() {
   score = snake.length - 1;
   clearInterval(intervalCount);
+  updateInterval = 500;
   moveDirection = 0;
   snakeVert = blockSize * 3;
   snakeHor = blockSize * 5;
@@ -164,6 +167,10 @@ function eat() {
     segment.style.left = `${foodHor}px`;
     segment.style.height = `${blockSize}px`;
     segment.style.width = `${blockSize}px`;
+    // Preparation for new option
+    // segment.innerText = `${
+    //   segmentText[(snake.length % segmentText.length) - 1]
+    // }`;
     board.appendChild(segment);
     snake.push(segment);
     foodHor = Math.floor(Math.random() * columns) * blockSize;
@@ -175,6 +182,12 @@ function eat() {
     document.getElementById("segmentCounter").innerHTML = `Score: ${
       snake.length - 1
     }`;
+    // snake speed-up
+    clearInterval(intervalCount);
+    updateInterval = updateInterval * 0.9;
+    const gameInterval = setInterval(update, updateInterval);
+    console.log(gameInterval);
+    intervalCount++;
   }
 }
 function HighScore() {
@@ -211,7 +224,7 @@ function PopupInput() {
       <input type="text" name="highscorerName" id="highscorerName" autofocus />
       <button onclick="highScoreSave()" id="highScoreSave">Save</button>
     <button id="popupClose" onclick = "event.target.parentElement.remove(); setInterval(update, updateInterval);
-  intervalCount++;
+  intervalCount++; 
   moveDirection = 0; ">X</button>
   </div>`;
 
