@@ -80,7 +80,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 const gameInterval = setInterval(update, updateInterval);
-console.log(gameInterval);
+
 intervalCount++;
 
 function update() {
@@ -186,7 +186,7 @@ function eat() {
     clearInterval(intervalCount);
     updateInterval = updateInterval * 0.9;
     const gameInterval = setInterval(update, updateInterval);
-    console.log(gameInterval);
+
     intervalCount++;
   }
 }
@@ -239,7 +239,7 @@ function highScoreSave() {
     highScoreList.length = 5;
   }
   highScoreTable();
-  console.log(highScoreList);
+
   setInterval(update, updateInterval);
   intervalCount++;
   moveDirection = 0;
